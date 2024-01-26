@@ -10,7 +10,7 @@
 name: Build and deploy a container to an Azure Web App
 
 env:
-    AZURE_WEBAPP_NAME: demoAzureApp # set this to your application's name
+    AZURE_WEBAPP_NAME: demoazureapp # set this to your application's name
 
 on:
     push:
@@ -38,14 +38,11 @@ jobs:
                   username: ${{ github.actor }}
                   password: ${{ secrets.GITHUB_TOKEN }}
 
-            - name: Lowercase the repo name
-              run: echo "REPO=${azure_docker_demo,,}" >>${GITHUB_ENV}
-
             - name: Build and push container image to registry
               uses: docker/build-push-action@v4
               with:
                   push: true
-                  tags: ghcr.io/${{ env.REPO }}:${{ github.sha }}
+                  tags: ghcr.io/clue355/image:dev
                   file: ./Dockerfile.dev
 
     deploy:
@@ -59,12 +56,11 @@ jobs:
 
         steps:
             - name: Lowercase the repo name
-              run: echo "REPO=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
 
             - name: Deploy to Azure Web App
               id: deploy-to-webapp
-              uses: azure/webapps-deploy@85270a1854658d167ab239bce43949edb336fa7c
+              uses: azure/webapps-deploy@v3
               with:
                   app-name: ${{ env.AZURE_WEBAPP_NAME }}
                   publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-                  images: "ghcr.io/${{ env.REPO }}:${{ github.sha }}"
+                  images: "ghcr.io/clue355/image:dev"
