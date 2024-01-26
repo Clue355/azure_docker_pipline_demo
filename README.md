@@ -45,7 +45,7 @@ Enter your username and token (as a password) using the following flags, either 
 Hub.
 
 ```
-docker login --username username_here --password password_here
+echo "YOUR_PERSONAL_ACCESS_TOKEN" | docker login ghcr.io -u YOUR_GITHUB_USERNAME --password-stdin
 ```
 
 ## Commands to start the project
