@@ -42,7 +42,7 @@ jobs:
               uses: docker/build-push-action@v4
               with:
                   push: true
-                  tags: ghcr.io/clue355/image:dev
+                  tags: ghcr.io/clue355/azure_pipeline:dev
                   file: ./Dockerfile.dev
 
     deploy:
@@ -66,4 +66,4 @@ jobs:
               with:
                   app-name: ${{ env.AZURE_WEBAPP_NAME }}
                   publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-                  images: "ghcr.io/clue355/image:dev"
+                  images: "ghcr.io/clue355/azure_pipeline:dev"
