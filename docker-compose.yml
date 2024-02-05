@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   app-dev:
-    image: your_container_repo_here
+    image: ghcr.io/clue355/azure_pipeline:dev
     ports:
       - "3000:3000"
     volumes:
