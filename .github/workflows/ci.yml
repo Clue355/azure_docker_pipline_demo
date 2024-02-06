@@ -24,4 +24,4 @@ jobs:
                   context: .
                   file: ./Dockerfile.dev
                   push: true
-                  tags: ghcr.io/clue355/image:dev
+                  tags: ghcr.io/clue355/azure_pipeline:dev
